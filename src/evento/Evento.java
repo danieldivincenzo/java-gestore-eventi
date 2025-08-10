@@ -57,26 +57,30 @@ public class Evento {
     }
 
     public void setData(LocalDate data) {
-        this.data = data;
+        if (data.isBefore(LocalDate.now())){
+            throw new IllegalArgumentException("Impossibile inserire una data antecedente a quella odierna.");
+        } else {
+            this.data = data;
+        }
     }
 
     public void prenota(){
         if (this.data.isBefore(LocalDate.now())){
             throw new IllegalStateException("Impossibile prenotare posti per un evento passato.");
-        } else if (this.postiPrenotati == this.postiTotali){
+        } else if (this.postiPrenotati >= this.postiTotali){
             throw new IllegalStateException("Impossibile prenotare, i posti sono esauriti.");
         } else {
-            this.postiPrenotati += 1;
+            this.postiPrenotati++;
         }
     }
 
     public void disdici(){
         if (this.data.isBefore(LocalDate.now())){
             throw new IllegalStateException("Impossibile disdire posti per un evento passato.");
-        } else if (this.postiPrenotati == 0){
+        } else if (this.postiPrenotati <= 0){
             throw new IllegalStateException("Non sono presenti prenotazioni da disdire.");
         } else {
-            this.postiPrenotati -= 1;
+            this.postiPrenotati--;
         }
     }
 
