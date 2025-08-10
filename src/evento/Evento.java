@@ -13,9 +13,24 @@ public class Evento {
 
     //Costruttore
     public Evento(String titolo, LocalDate data, int postiTotali) {
-        this.titolo = titolo;
-        this.data = data;
-        this.postiTotali = postiTotali;
+        if(titolo == null || titolo.isBlank()){
+            throw new IllegalArgumentException("Il titolo dell'evento è obbligatorio.");
+        } else {
+            this.titolo = titolo;
+        }
+
+        if(data == null || data.isBefore(LocalDate.now())){
+            throw new IllegalArgumentException("Impossibile inserire una data antecedente a quella odierna.");
+        } else {
+            this.data = data;
+        }
+
+        if(postiTotali <= 0){
+            throw new IllegalArgumentException("Impossibile inserire un numero di posti totali negativo o uguale a 0.");
+        } else {
+            this.postiTotali = postiTotali;
+        }
+
         this.postiPrenotati = 0;
     }
 
@@ -45,6 +60,31 @@ public class Evento {
         this.data = data;
     }
 
+    public void prenota(){
+        if (this.data.isBefore(LocalDate.now())){
+            throw new IllegalStateException("Impossibile prenotare posti per un evento passato.");
+        } else if (this.postiPrenotati == this.postiTotali){
+            throw new IllegalStateException("Impossibile prenotare, i posti sono esauriti.");
+        } else {
+            this.postiPrenotati += 1;
+        }
+    }
+
+    public void disdici(){
+        if (this.data.isBefore(LocalDate.now())){
+            throw new IllegalStateException("Impossibile disdire posti per un evento passato.");
+        } else if (this.postiPrenotati == 0){
+            throw new IllegalStateException("Non sono presenti prenotazioni da disdire.");
+        } else {
+            this.postiPrenotati -= 1;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Data: " + this.data + " - " + "Titolo: " + titolo;
+    }
+    
     
 
 }
