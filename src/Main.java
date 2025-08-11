@@ -35,14 +35,16 @@ public class Main {
 
         }
 
-        
 
-        System.out.println("Vuole eseguire prenotazioni? (si/no)");
-        String risposta = scan.nextLine();
-        
+        System.out.println("\nVuole eseguire prenotazioni? (si/no)");
+        String rispostaP = scan.nextLine();
 
-        if(risposta.equalsIgnoreCase("si")){
-
+        if(rispostaP.equalsIgnoreCase("no")){
+            System.out.println("Non si vogliono eseguire prenotazioni, arrivederci.");
+            scan.close();
+            System.exit(0);
+             
+        } else {
             System.out.println("Quanti posti vuole prenotare?");
             int numeroPrenotazioni = 0;
 
@@ -56,17 +58,55 @@ public class Main {
                 for (int i = 0; i < numeroPrenotazioni; i++) {
                     try {
                         e1.prenota();
-                    } catch (Exception e) {
+                        System.out.println(numeroPrenotazioni + " " + "prenotazioni effettuate.");
+
+                    } catch (IllegalStateException e) {
                         System.err.println("Impossibile effettuare la prenotazione: " + e.getMessage());
                         break;
                     }
                 }
-                System.out.println(numeroPrenotazioni + " " + "prenotazioni effettuate.");
-            } else {
-
             }
         }
         
+        
+
+        System.out.println("I posti prenotati sono: " + e1.getPostiPrenotati() + ", i posti ancora disponibili sono: " + e1.getPostiTotali());
+
+        
+
+        System.out.println("\nVuole eseguire disdette? (si/no)");
+            String rispostaD = scan.nextLine();
+            
+
+            if(rispostaD.equalsIgnoreCase("si")){
+                System.out.println("Non si vogliono eseguire disdette, arrivederci.");
+                scan.close();
+                System.exit(0);
+                
+            } else {
+                System.out.println("Quanti posti vuole disdire?");
+                int numeroDisdette = 0;
+
+                try {
+                    numeroDisdette = scan.nextInt();
+
+                } catch (InputMismatchException e) {
+                    System.err.println("Input non valido, nessuna disdetta effettuata.");
+
+                }
+
+                if (numeroDisdette > 0){
+                    for (int i = 0; i < numeroDisdette; i++) {
+                        try {
+                            e1.disdici();
+                            System.out.println(numeroDisdette + " " + "disdette effettuate.");
+                        } catch (IllegalStateException e) {
+                            System.err.println("Impossibile effettuare la prenotazione: " + e.getMessage());
+                            break;
+                        }
+                    }
+                }
+            }
         
     }
 }

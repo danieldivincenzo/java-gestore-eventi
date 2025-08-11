@@ -71,6 +71,7 @@ public class Evento {
             throw new IllegalStateException("Impossibile prenotare, i posti sono esauriti.");
         } else {
             this.postiPrenotati++;
+            this.postiTotali--;
         }
     }
 
@@ -81,6 +82,7 @@ public class Evento {
             throw new IllegalStateException("Non sono presenti prenotazioni da disdire.");
         } else {
             this.postiPrenotati--;
+            this.postiTotali++;
         }
     }
 

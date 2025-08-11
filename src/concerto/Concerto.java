@@ -1,8 +1,11 @@
 package concerto;
 
 import evento.Evento;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Concerto extends Evento {
     private LocalTime ora;
@@ -34,5 +37,19 @@ public class Concerto extends Evento {
         this.prezzo = prezzo;
     }
     
-    
+    public String getDataOraForm() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return getData().atTime(ora).format(formatter);
+    }
+
+    public String getPrezzoForm() {
+        NumberFormat formatterPrezzo = NumberFormat.getCurrencyInstance(Locale.ITALY);
+        return formatterPrezzo.format(prezzo);
+    }
+
+    @Override
+    public String toString() {
+        return "Data e ora: " + getDataOraForm() + " - " + "Titolo: " + getTitolo() + " - " + "Prezzo: " + getPrezzoForm();
+    }
+     
 }
