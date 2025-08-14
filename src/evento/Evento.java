@@ -67,11 +67,10 @@ public class Evento {
     public void prenota(){
         if (this.data.isBefore(LocalDate.now())){
             throw new IllegalStateException("Impossibile prenotare posti per un evento passato.");
-        } else if (this.postiPrenotati >= this.postiTotali){
-            throw new IllegalStateException("Impossibile prenotare, i posti sono esauriti.");
+        } else if (this.postiPrenotati > this.postiTotali){
+            throw new IllegalStateException("Impossibile prenotare, il numero di posti richiesti supera quello dei posti liberi.");
         } else {
             this.postiPrenotati++;
-            this.postiTotali--;
         }
     }
 
@@ -82,7 +81,6 @@ public class Evento {
             throw new IllegalStateException("Non sono presenti prenotazioni da disdire.");
         } else {
             this.postiPrenotati--;
-            this.postiTotali++;
         }
     }
 
