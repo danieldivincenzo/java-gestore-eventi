@@ -144,6 +144,13 @@ public class Main {
                     System.err.println("I dati inseriti per creare il nuovo evento non sono validi: " + e.getMessage());
                     scan.nextLine();
                 }
+                
+                System.out.println("L'orario scelto è: " + c1.getOra());
+                System.out.println("Il prezzo è: " + c1.getPrezzo());
+                c1.setOra(LocalTime.parse("14:30"));
+                c1.setPrezzo(200.99);
+                System.out.println("\nIl giorno e l'orario scelto sono: " + c1.getDataOraForm());
+                System.out.println("Il prezzo formattato è: " + c1.getPrezzoForm());
 
             }
             
