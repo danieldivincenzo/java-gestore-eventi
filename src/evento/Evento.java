@@ -1,6 +1,7 @@
 package evento;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Evento {
     private String titolo;
@@ -84,9 +85,14 @@ public class Evento {
         }
     }
 
+    public String getDataForm() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return getData().format(formatter);
+    }
+    
     @Override
     public String toString() {
-        return "Data: " + this.data + " - " + "Titolo: " + titolo;
+        return "Data: " + this.getDataForm() + " - " + "Titolo: " + titolo;
     }
     
     

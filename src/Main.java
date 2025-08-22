@@ -1,14 +1,16 @@
 
 import concerto.Concerto;
+import evento.Evento;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        /* Evento e1 = null;
+        Evento e1 = null;
         boolean eventoCreato = false;
         while (!eventoCreato){
             try {
@@ -78,7 +80,7 @@ public class Main {
             
 
             if(rispostaD.equalsIgnoreCase("no")){
-                System.out.println("Non si vogliono eseguire disdette.");
+                System.out.println("\nNon si vogliono eseguire disdette.");
             } else {
                 System.out.println("Quanti posti vuole disdire?");
                 int numeroDisdette = 0;
@@ -106,7 +108,7 @@ public class Main {
                     }
                     System.out.println("\nI posti prenotati sono: " + e1.getPostiPrenotati() + ", i posti ancora disponibili sono: " + (e1.getPostiTotali() - e1.getPostiPrenotati()));
                 }
-            } */
+            }
             
 
 
@@ -137,7 +139,8 @@ public class Main {
                     
                     c1 = new Concerto(titolo, data, postiTotali, ora, prezzo);
                     concertoCreato = true;
-                    System.out.println("Inserimento evento avvenuto con successo.");
+                    
+                    System.out.println("\nInserimento evento avvenuto con successo.");
                     System.out.println(c1.toString());
 
                 } catch (Exception e) {
