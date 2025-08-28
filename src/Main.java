@@ -1,10 +1,10 @@
 
-import concerto.Concerto;
 import evento.Evento;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import programmaEventi.ProgrammaEventi;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,7 +35,6 @@ public class Main {
             } catch (Exception e) {
                 System.err.println("I dati inseriti per creare il nuovo evento non sono validi: " + e.getMessage());
             }
-
         }
 
 
@@ -112,7 +111,7 @@ public class Main {
             
 
 
-            Concerto c1 = null;
+            /* Concerto c1 = null;
             boolean concertoCreato = false;
             while (!concertoCreato){
                 try {
@@ -139,7 +138,7 @@ public class Main {
                     
                     c1 = new Concerto(titolo, data, postiTotali, ora, prezzo);
                     concertoCreato = true;
-                    
+
                     System.out.println("\nInserimento evento avvenuto con successo.");
                     System.out.println(c1.toString());
 
@@ -147,15 +146,94 @@ public class Main {
                     System.err.println("I dati inseriti per creare il nuovo evento non sono validi: " + e.getMessage());
                     scan.nextLine();
                 }
-                
-                System.out.println("L'orario scelto è: " + c1.getOra());
-                System.out.println("Il prezzo è: " + c1.getPrezzo());
-                c1.setOra(LocalTime.parse("14:30"));
-                c1.setPrezzo(200.99);
-                System.out.println("\nIl giorno e l'orario scelto sono: " + c1.getDataOraForm());
-                System.out.println("Il prezzo formattato è: " + c1.getPrezzoForm());
-
             }
+
+
+            System.out.println("\nL'orario scelto è: " + c1.getOra());
+            System.out.println("Il prezzo è: " + c1.getPrezzo());
+            c1.setOra(LocalTime.parse("14:30"));
+            c1.setPrezzo(200.99);
+            System.out.println("\nIl giorno e l'orario scelto sono: " + c1.getDataOraForm());
+            System.out.println("Il prezzo formattato è: " + c1.getPrezzoForm()); */
+
+            
+            
+            Evento e2 = null;
+            boolean eventoCreato2 = false;
+            while (!eventoCreato2){
+                try {
+                    System.out.println("Prego inserire un nuovo evento con annessi i suoi parametri: ");
+                    
+                    System.out.println("Titolo: ");
+                    String titolo = scan.nextLine();
+            
+                    System.out.println("Data (YYYY-MM-DD): ");
+                    String dataS = scan.nextLine();
+                    LocalDate data = LocalDate.parse(dataS);
+            
+                    System.out.println("Numero dei posti totali: ");
+                    int postiTotali = scan.nextInt();
+                    scan.nextLine();
+                    
+                    e2 = new Evento(titolo, data, postiTotali);
+                    eventoCreato2 = true;
+                    System.out.println("Inserimento evento avvenuto con successo.");
+                    System.out.println(e2.toString());
+
+                } catch (Exception e) {
+                    System.err.println("I dati inseriti per creare il nuovo evento non sono validi: " + e.getMessage());
+                }
+            }
+
+            Evento e3 = null;
+            boolean eventoCreato3 = false;
+            while (!eventoCreato3){
+                try {
+                    System.out.println("Prego inserire un nuovo evento con annessi i suoi parametri: ");
+                    
+                    System.out.println("Titolo: ");
+                    String titolo = scan.nextLine();
+            
+                    System.out.println("Data (YYYY-MM-DD): ");
+                    String dataS = scan.nextLine();
+                    LocalDate data = LocalDate.parse(dataS);
+            
+                    System.out.println("Numero dei posti totali: ");
+                    int postiTotali = scan.nextInt();
+                    scan.nextLine();
+                    
+                    e3 = new Evento(titolo, data, postiTotali);
+                    eventoCreato3 = true;
+                    System.out.println("Inserimento evento avvenuto con successo.");
+                    System.out.println(e3.toString());
+
+                } catch (Exception e) {
+                    System.err.println("I dati inseriti per creare il nuovo evento non sono validi: " + e.getMessage());
+                }
+            }
+
+            System.out.println("\nPrego inserire il nome del nuovo programma eventi: ");
+            String programmaEventi = scan.nextLine();
+            ProgrammaEventi p1 = new ProgrammaEventi(programmaEventi);
+            p1.aggiungiEvento(e1);
+            p1.aggiungiEvento(e2);
+            p1.aggiungiEvento(e3);
+            System.out.println("\nIl numero degli eventi presenti nella lista è: " + p1.getNumeroEventi());
+            //p1.svuotaLista();
+            //System.out.println("\nIl numero degli eventi presenti nella lista è: " + p1.getNumeroEventi());
+            
+            LocalDate dataRicerca = LocalDate.of(2026, 12, 12);
+            List<Evento> eventiDelGiorno = p1.getEventiData(dataRicerca);
+            if (eventiDelGiorno.isEmpty()) {
+            System.out.println("Non ci sono eventi nella data: " + dataRicerca);
+            } else {
+                System.out.println("Eventi del " + dataRicerca + ":");
+                for (Evento evento : eventiDelGiorno) {
+                    System.out.println(evento.toString());
+                }
+            }
+
+            System.out.println("\n" + p1.getEventiOrdinatiData());
             
     }
 }

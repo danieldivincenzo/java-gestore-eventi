@@ -3,6 +3,7 @@ package programmaEventi;
 import evento.Evento;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProgrammaEventi {
@@ -36,5 +37,20 @@ public class ProgrammaEventi {
             }
         }
         return eventiFiltrati;
+    }
+
+    public String getEventiOrdinatiData(){
+        Collections.sort(this.eventi, (e1, e2) -> e1.getData().compareTo(e2.getData()));
+
+        String risultato = this.titolo + ":\n";
+
+        if (this.eventi.isEmpty()){
+            risultato += "Nessun evento presente";
+        } else {
+            for (Evento evento : this.eventi){
+                risultato += evento.toString() + "\n";
+            }
+        }
+        return risultato;
     }
 }
