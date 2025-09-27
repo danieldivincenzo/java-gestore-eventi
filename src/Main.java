@@ -74,7 +74,7 @@ public class Main {
         
         
 
-        System.out.println("\nVuole eseguire disdette? (si/no)");
+            System.out.println("\nVuole eseguire disdette? (si/no)");
             String rispostaD = scan.nextLine();
             
 
@@ -234,6 +234,6 @@ public class Main {
             }
 
             System.out.println("\n" + p1.getEventiOrdinatiData());
-            
+            scan.close();
     }
 }

@@ -54,7 +54,11 @@ public class Evento {
 
     //Setters
     public void setTitolo(String titolo) {
-        this.titolo = titolo;
+        if(titolo == null || titolo.isBlank()){
+            throw new IllegalArgumentException("Il titolo dell'evento è obbligatorio.");
+        } else {
+            this.titolo = titolo;
+        }
     }
 
     public void setData(LocalDate data) {
